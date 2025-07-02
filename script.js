@@ -10,7 +10,7 @@ function responder() {
   document.getElementById("enviarBtn").disabled = true;
   mostrarCargando();
 
-fetch("https://replit.com/@yamilesquivescu/Nodejs.temuco.repl.co/temuco", {
+fetch("https://5cb72440-0ac6-4e15-9573-a235335641e8-00-3bdzcywl18rog.kirk.replit.dev/.temuco.repl.co/temuco", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ mensaje: input })
