@@ -10,16 +10,11 @@ function responder() {
   document.getElementById("enviarBtn").disabled = true;
   mostrarCargando();
 
-  fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${apiKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      model: "meta-llama/llama-3-8b-instruct",
-      messages: [{ role: "user", content: input }]
-    })
+fetch("https://https://replit.com/@yamilesquivescu/Nodejs.temuco.repl.co/temuco", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ mensaje: input })
+})
   })
     .then(res => {
       if (!res.ok) throw new Error(`Error ${res.status}`);
