@@ -12,7 +12,9 @@ function responder() {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ message: input })
+    body: JSON.stringify({
+      message: input
+    })
   })
     .then(res => {
       if (!res.ok) throw new Error(`Error ${res.status}`);
@@ -60,10 +62,10 @@ function ocultarCargando() {
   if (cargando) cargando.remove();
 }
 
-// ✅ Enviar con Enter
+// Enviar con Enter
 document.getElementById("userInput").addEventListener("keydown", e => {
   if (e.key === "Enter") responder();
 });
 
-// ✅ Enviar con botón avioncito
+// Enviar con botón
 document.getElementById("enviarBtn").addEventListener("click", responder);
