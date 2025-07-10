@@ -3,20 +3,16 @@ function responder() {
   if (!input) return;
   agregarMensaje(input, "user");
 
-  // Desactiva input y botón
   document.getElementById("userInput").disabled = true;
   document.getElementById("enviarBtn").disabled = true;
   mostrarCargando();
 
-  // Petición al backend Temuco
-  fetch("https://temuco-backend.yomix.repl.co/api/chat", {
+  fetch("https://temuco-backend.yamilesquivescu.repl.co/api/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      message: input
-    })
+    body: JSON.stringify({ message: input })
   })
     .then(res => {
       if (!res.ok) throw new Error(`Error ${res.status}`);
@@ -64,5 +60,10 @@ function ocultarCargando() {
   if (cargando) cargando.remove();
 }
 
+// ✅ Enviar con Enter
 document.getElementById("userInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") responder());
+  if (e.key === "Enter") responder();
+});
+
+// ✅ Enviar con botón avioncito
+document.getElementById("enviarBtn").addEventListener("click", responder);
