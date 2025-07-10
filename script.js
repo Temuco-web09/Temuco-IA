@@ -7,7 +7,7 @@ function responder() {
   document.getElementById("enviarBtn").disabled = true;
   mostrarCargando();
 
-  fetch("https://988aac77-8ff6-44ef-b9f8-139ca451074e-00-21j9xk0j1wjjd.riker.replit.dev/", {
+  fetch("https://988aac77-8ff6-44ef-b9f8-139ca451074e-00-21j9xk0j1wjjd.riker.replit.dev/api/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
