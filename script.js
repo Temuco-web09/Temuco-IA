@@ -1,5 +1,3 @@
-const apiKey = "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";
-
 function responder() {
   const input = document.getElementById("userInput").value.trim();
   if (!input) return;
@@ -10,11 +8,15 @@ function responder() {
   document.getElementById("enviarBtn").disabled = true;
   mostrarCargando();
 
-fetch("https://5cb72440-0ac6-4e15-9573-a235335641e8-00-3bdzcywl18rog.kirk.replit.dev/.temuco.repl.co/temuco", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ mensaje: input })
-})
+  // Petición al backend Temuco
+  fetch("https://temuco-backend.yomix.repl.co/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: input
+    })
   })
     .then(res => {
       if (!res.ok) throw new Error(`Error ${res.status}`);
@@ -63,5 +65,4 @@ function ocultarCargando() {
 }
 
 document.getElementById("userInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") responder();
-});
+  if (e.key === "Enter") responder());
