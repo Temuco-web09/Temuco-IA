@@ -40,7 +40,7 @@ async function sendMessage() {
   userInput.value = "";
 
   try {
-    const res = await fetch("https://temuco-backend-6o9v.onrender.com", {
+    const res = await fetch("https://temuco-backend-6o9v.onrender.com/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message })
