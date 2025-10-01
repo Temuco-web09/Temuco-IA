@@ -1,0 +1,386 @@
+/* ===== BODY ===== */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;           /* ocupa toda la pantalla horizontal */
+  overflow-x: hidden;     /* evita scroll horizontal */
+}
+
+/* ===== LOGO ===== */
+.logo-container {
+  margin-top: 20px;
+  animation: fadeIn 1s ease;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(135deg, #00d2ff, #3a7bd5, #8e2de2);
+  box-shadow: 0 0 20px rgba(0,210,255,0.6);
+}
+
+.logo-container img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+}
+
+/* ===== CHAT CONTAINER ===== */
+#chatContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 95%;           /* ocupa casi toda la pantalla horizontal */
+  max-width: 1200px;    /* no se sale en pantallas enormes */
+  height: 90vh;         /* casi toda la altura de la pantalla */
+  margin-top: 20px;
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  animation: fadeIn 1s ease;
+}
+
+/* ===== CHAT MESSAGES ===== */
+#chat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* por defecto las burbujas se colocan a la izquierda */
+  padding: 20px;
+  overflow-y: auto;
+  gap: 10px;
+}
+
+/* burbujas ajustables al contenido */
+.message {
+  display: inline-block;       /* se adapta al ancho del texto */
+  max-width: 80%;              /* no deja que una burbuja crezca demasiado */
+  padding: 12px 18px;
+  border-radius: 18px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ===== BURBUJAS: usuario (izq→der: azul → morado) y IA (azul oscuro) ===== */
+.message.user {
+  background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 50%, #8e2de2 100%); /* azul (izq) → morado (der) */
+  color: #fff;
+  margin-left: auto;        /* empuja la burbuja hacia la derecha */
+  align-self: flex-end;     /* robusto si #chat es flex column */
+  text-align: right;        /* texto dentro alineado a la derecha */
+  /* opcionales para que el degradado respete el borde redondeado en todos los navegadores */
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.message.bot {
+  background: linear-gradient(135deg, #141e30 0%, #243b55 100%); /* degradado azul oscuro elegante */
+  color: #fff;
+  margin-right: auto;       /* empuja la burbuja hacia la izquierda si hace falta */
+  align-self: flex-start;
+  text-align: left;
+}
+
+/* ===== INPUT ===== */
+#inputContainer {
+  display: flex;
+  padding: 10px;
+  background-color: #121212;
+}
+
+#userInput {
+  flex: 1;
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* ===== BOTÓN ENVIAR ===== */
+#enviarBtn {
+  margin-left: 10px;
+  background: linear-gradient(135deg, #00d2ff, #3a7bd5, #8e2de2);
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+#enviarBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+/* ===== CARGANDO ===== */
+.message.bot .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+.message.bot .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.message.bot .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+}
+
+/* ===== MEDIA QUERIES PARA RESPONSIVE ===== */
+@media (max-width: 900px) {
+  #chatContainer {
+    width: 98%;
+    height: 92vh;
+  }
+
+  .message {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  #chatContainer {
+    width: 98%;
+    height: 95vh;
+  }
+
+  .message {
+    max-width: 95%;
+  }
+
+  #userInput {
+    font-size: 13px;
+  }
+}
+
+/* ===== ANIMACIONES DE MENSAJES ===== */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Mensajes del usuario */
+.message.user {
+  animation: fadeInRight 0.35s ease-out;
+  transform-origin: right bottom;
+}
+
+/* Mensajes de la IA */
+.message.bot {
+  animation: fadeInLeft 0.35s ease-out;
+  transform-origin: left bottom;
+}
+
+/* ... aquí termina tu CSS actual ... */
+
+/* ===== ANIMACIÓN SUAVE PARA MENSAJES ===== */
+.message {
+  animation: popIn 0.25s ease forwards;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95); /* empieza un poquito más pequeño */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);    /* tamaño normal */
+  }
+}
+
+/* evita la barra blanca molesta */
+#chat {
+  overflow-x: hidden;
+}
+
+/* ===== SCROLLBAR PERSONALIZADO DEL CHAT ===== */
+#chat::-webkit-scrollbar {
+  width: 8px;              /* grosor */
+}
+
+#chat::-webkit-scrollbar-track {
+  background: #121212;     /* fondo igual al body */
+  border-radius: 10px;
+}
+
+#chat::-webkit-scrollbar-thumb {
+  background: #3a7bd5;     /* azul degradado del tema */
+  border-radius: 10px;
+}
+
+#chat::-webkit-scrollbar-thumb:hover {
+  background: #00d2ff;     /* un poquito más claro al pasar el mouse */
+}
+
+/* ===== EFECTO EXTRA PARA BURBUJAS DE USUARIO SIN GLOW ===== */
+.message.user {
+  background: linear-gradient(135deg, #8e2de2, #3a7bd5); /* degradado más vivo */
+  color: #fff;
+  margin-left: auto;
+  align-self: flex-end;
+  text-align: right;
+  animation: fadeInRight 0.35s ease-out, glowUser 3s infinite alternate;
+  transform-origin: right bottom;
+}
+
+@keyframes glowUser {
+  from {
+    box-shadow: 0 0 8px rgba(142, 45, 226, 0.5), 0 0 15px rgba(58, 123, 213, 0.3);
+  }
+  to {
+    box-shadow: 0 0 15px rgba(142, 45, 226, 0.8), 0 0 25px rgba(58, 123, 213, 0.6);
+  }
+}
+
+/* ===== EFECTO EXTRA PARA BURBUJAS IA (con azul oscuro elegante) ===== */
+.message.bot {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* azul oscuro degradado */
+  color: #fff;
+  margin-right: auto;
+  align-self: flex-start;
+  text-align: left;
+  animation: fadeInLeft 0.35s ease-out, glowBot 3s infinite alternate;
+  transform-origin: left bottom;
+}
+
+@keyframes glowBot {
+  from {
+    box-shadow: 0 0 8px rgba(44, 83, 100, 0.4), 0 0 15px rgba(32, 58, 67, 0.3);
+  }
+  to {
+    box-shadow: 0 0 15px rgba(44, 83, 100, 0.7), 0 0 25px rgba(32, 58, 67, 0.6);
+  }
+}
+
+/* ===== EFECTO EXTRA PARA BURBUJAS USUARIO (con glow animado) ===== */
+.message.user {
+  background: linear-gradient(135deg, #8e2de2, #3a7bd5, #00d2ff); /* mismo degradado que el logo */
+  color: #fff;
+  margin-left: auto;
+  align-self: flex-end;
+  text-align: right;
+  animation: fadeInRight 0.35s ease-out, glowUser 3s infinite alternate;
+  transform-origin: right bottom;
+}
+
+@keyframes glowUser {
+  from {
+    box-shadow: 0 0 8px rgba(142, 45, 226, 0.4), 0 0 15px rgba(58, 123, 213, 0.3);
+  }
+  to {
+    box-shadow: 0 0 15px rgba(142, 45, 226, 0.7), 0 0 25px rgba(58, 123, 213, 0.6);
+  }
+}
+
+/* ===== MEJORAS RESPONSIVE EXTRA ===== */
+@media (max-width: 768px) {
+  #chatContainer {
+    width: 100%;
+    height: 92vh;
+    border-radius: 0; /* ocupa toda la pantalla sin bordes */
+  }
+
+  #chat {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .message {
+    max-width: 85%;
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  #userInput {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #enviarBtn {
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-container img {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+@media (max-width: 480px) {
+  .message {
+    max-width: 90%;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  #userInput {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  #enviarBtn {
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+  }
+
+  .logo-container img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.message p {
+  margin: 0;
+  line-height: 1.3; /* ajusta según se vea bien */
+}
